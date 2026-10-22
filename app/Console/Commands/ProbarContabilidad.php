@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Events\FacturaEmitida;
 use Illuminate\Console\Command;
 use App\Services\IvaService;
 use App\Services\SueldosService;
@@ -26,6 +27,10 @@ class ProbarContabilidad extends Command
             'monto_iva' => 21000.00,
             'total' => 121000.00
         ]);
+
+        // 🔥 ¡AQUÍ EXACTAMENTE DISPARAMOS EL WEBSOCKET!
+        broadcast(new FacturaEmitida('A-0001', 121000.00));
+        $this->info("📢 WebSocket transmitido: Factura A-0001 enviada a Reverb.");
 
         // 2. Simular Liquidación de Sueldos del mes
         // Datos: Bruto $1.500.000, Retenciones $255.000, Neto $1.245.000

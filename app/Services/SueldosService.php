@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+
 use App\Services\ContabilidadService;
 
 class SueldosService

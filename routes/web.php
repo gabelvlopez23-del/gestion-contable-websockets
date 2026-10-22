@@ -16,3 +16,8 @@ Route::get('/contabilidad/cargar-asiento', function () {
     $cuentas = \App\Models\PlanCuenta::where('recibe_asientos', true)->get();
     return view('cargar_asiento', compact('cuentas'));
 });
+
+// 4. Ruta para la pantalla del Receptor en Tiempo Real (Demo WebSockets)
+Route::get('/receptor', function () {
+    return view('receptor');
+});

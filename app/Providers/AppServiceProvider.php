@@ -3,21 +3,27 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Broadcast; // <-- Asegúrate de que esté esta línea
+use Illuminate\Support\Facades\Broadcast;
 
 class AppServiceProvider extends ServiceProvider
 {
+    /**
+     * Register any application services.
+     */
     public function register(): void
     {
         //
     }
 
+    /**
+     * Bootstrap any application services.
+     */
     public function boot(): void
     {
-        // 🚀 ESTA LÍNEA DESTRABA LOS CANALES PRIVADOS EN LARAVEL 11/12/13
-        Broadcast::routes(); 
+        // Activa el ruteo básico de transmisión para WebSockets
+        Broadcast::routes();
 
-        // Carga automática de los canales
+        // Carga el archivo de canales de tu proyecto
         require base_path('routes/channels.php');
     }
 }
